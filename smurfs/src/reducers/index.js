@@ -1,13 +1,17 @@
 //reducers index
 
-import { FETCHING_SMURFS_START, FETCHING_SMURFS_SUCCESS } from '../actions';
+import { 
+  FETCHING_SMURFS_START, 
+  FETCHING_SMURFS_SUCCESS 
+} from '../actions';
 
 const initialState = {
   isLoading: false,
-  name: null,
+  name: "",
   age: null,
   height: null,
-  id: 0
+  id: null,
+  error: ""
 }
 
 export const reducer = (state = initialState, action) => {
@@ -21,10 +25,10 @@ export const reducer = (state = initialState, action) => {
         return{
           ...state,
           isLoading: false,
-          name: action.payload,
-          age: action.payload,
-          height: action.payload,
-          id: action.payload
+          name: action.payload.name,
+          age: action.payload.age,
+          height: action.payload.height,
+          id: action.payload.id
         }
     default:
       console.log(state);

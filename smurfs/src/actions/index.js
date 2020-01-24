@@ -7,9 +7,10 @@ export const FETCHING_SMURFS_SUCCESS = "FETCHING_SMURFS_SUCCESS";
 export const FETCHING_SMURFS_FAILURE = "FETCHING_SMURFS_FAILURE";
 
 export const fetchSmurf = () => {
-  dispatchEvent({
-    type: FETCHING_SMURFS_START
-  });
+  return dispatchEvent => {
+    dispatchEvent({
+      type: FETCHING_SMURFS_START
+    })
   axios
     .get(`http://localhost:3333/smurfs`)
     .then(res => {
@@ -26,4 +27,5 @@ export const fetchSmurf = () => {
         payload: err.response
       })
     })
+  }
 }
