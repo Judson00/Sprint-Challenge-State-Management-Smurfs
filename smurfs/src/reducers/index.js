@@ -2,15 +2,12 @@
 
 import { 
   FETCHING_SMURFS_START, 
-  FETCHING_SMURFS_SUCCESS 
+  FETCHING_SMURFS_SUCCESS,
+  ADD_NEW_SMURF 
 } from '../actions';
 
 const initialState = {
-  isLoading: false,
-  name: "",
-  age: null,
-  height: null,
-  id: null,
+  smurfs: [],
   error: ""
 }
 
@@ -25,10 +22,14 @@ export const reducer = (state = initialState, action) => {
         return{
           ...state,
           isLoading: false,
-          name: action.payload.name,
-          age: action.payload.age,
-          height: action.payload.height,
-          id: action.payload.id
+          smurfs: action.payload
+        }
+      case ADD_NEW_SMURF:
+        return{
+          ...state,
+          isLoading: false,
+          smurfs: action.payload
+
         }
     default:
       console.log(state);

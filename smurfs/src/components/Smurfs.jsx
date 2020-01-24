@@ -1,14 +1,16 @@
 //Smurfs component
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchSmurf } from '../actions';
 import Loader from 'react-loader-spinner';
 
-const Price = props => {
+const Smurfs = props => {
+  console.log("Smurfs.jsx line 9", props);
+  //useEffect(() => {props.fetchSmurf()}, [dispatch])
   return(
     <div>
-      {!props.smurf && props.isLoading && (
+      {!props.name && props.isLoading && (
         <h2>Find a Smurf</h2>
       )}
       {props.isLoading && (
@@ -20,19 +22,25 @@ const Price = props => {
         timeout={3000} //3 secs
       />
       )}
-      <button onClick={props.fetchSmurf}>Get a Smurf</button>
-      {
-        props.smurf
+      <button onClick={() => props.fetchSmurf()}>Get a Smurf</button>
+      {/* {
+        props.name
           &&
         !props.isLoading
-          &&
+          && */}
         <div>
-          <h2>{`Name: ${props.name}`}</h2>
-          <h2>{`Age: ${props.age}`}</h2>
-          <h2>{`Height: ${props.height}`}</h2>
+          {props.smurfs.map(smurf => {
+            return (
+              <div>
+                <h2>{`Name: ${smurf.name}`}</h2>
+                <h2>{`Age: ${smurf.age}`}</h2>
+                <h2>{`Height: ${smurf.height}`}</h2>
+              </div>
+            )
+          })}
         </div>
 
-      }
+      //}
     </div>
   )
 }
@@ -41,14 +49,11 @@ const mapStateToProps = state => {
   console.log(state);
   return{
     isLoading: state.isLoading,
-    name: state.name,
-    age: state.age,
-    height: state.height,
-    error: state.error
+    smurfs: state.smurfs
   }
 }
 
 export default connect(
   mapStateToProps,
   { fetchSmurf }
-)(Price);
+)(Smurfs);

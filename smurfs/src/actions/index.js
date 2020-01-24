@@ -5,6 +5,7 @@ import axios from 'axios';
 export const FETCHING_SMURFS_START = "FETCHING_SMURFS_START";
 export const FETCHING_SMURFS_SUCCESS = "FETCHING_SMURFS_SUCCESS";
 export const FETCHING_SMURFS_FAILURE = "FETCHING_SMURFS_FAILURE";
+export const ADD_NEW_SMURF = "ADD_NEW_SMURF";
 
 export const fetchSmurf = () => {
   return dispatchEvent => {
@@ -28,4 +29,15 @@ export const fetchSmurf = () => {
       })
     })
   }
+}
+
+export const addSmurf = newSmurf => dispatch => {
+  axios
+    .post(`http://localhost:3333/smurfs/`, newSmurf)
+    .then(res => dispatch(
+      { 
+        type: ADD_NEW_SMURF,
+        payLoad: res.data
+      })
+    )
 }
